@@ -5,7 +5,7 @@ const json = (data, status = 200) => new Response(JSON.stringify(data), {status,
 async function loadSettings(env) {
   if (!env.DB) throw new Error('Database unavailable');
   const row = await env.DB.prepare('SELECT content, revision, updated_at FROM site_settings WHERE id = ?').bind(1).first();
-  return row ? {settings: {...DEFAULTS,...JSON.parse(row.content)}, revision: row.revision, updatedAt: row.updated_at} : {settings: {...DEFAULTS},revision:0,updatedAt:null};
+  return row ? {settings: {...DEFAULTS,...JSON.parse(row.content)}, revision: row.revision, updatedAt: row.updated_at} : {settings: {...DEFAULTS, managerEmail: lower(env.SITE_MANAGER_EMAIL)},revision:0,updatedAt:null};
 }
 function validateSettings(value) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new Error('Informations invalides.');
@@ -39,7 +39,8 @@ async function allowed(request,env,state) {
   const email=lower(request.headers.get('oai-authenticated-user-email'));
   const owner=lower(env.SITE_OWNER_EMAIL);
   const isOwner=Boolean(id&&email&&owner&&email===owner);
-  return {email,isOwner,allowed:isOwner||Boolean(id&&email&&state.settings.managerEmail&&email===lower(state.settings.managerEmail))};
+  const designatedManager=lower(env.SITE_MANAGER_EMAIL);
+  return {email,isOwner,allowed:isOwner||Boolean(id&&email&&((state.settings.managerEmail&&email===lower(state.settings.managerEmail))||(designatedManager&&email===designatedManager)))};
 }
 function safePublic(state) {
   const {managerEmail,...settings}=state.settings;
