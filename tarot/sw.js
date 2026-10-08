@@ -1,0 +1,41 @@
+/* Oracle V2 : mode hors ligne limité aux ressources publiques de ce projet. */
+const CACHE_NAME='morgane-tarot-de-niko-v4';
+const BASE=new URL('./',self.registration.scope);
+const OFFLINE=new URL('index.html',BASE).href;
+const PATHS=[
+  './','index.html','styles.css','manifest.json',
+  'icons/icon-192.png','icons/icon-512.png',
+  'js/app.js','js/tarot-data.js','js/tarot-engine.js',
+  'js/card-art.js','js/oracle.js','js/vault.js','js/mistral-key.js'
+];
+const URLS=PATHS.map(path=>new URL(path,BASE).href);
+const CACHEABLE=new Set(URLS);
+self.addEventListener('install',event=>{
+  event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.addAll(URLS)).then(()=>self.skipWaiting()));
+});
+self.addEventListener('activate',event=>{
+  event.waitUntil(caches.keys().then(keys=>Promise.all(
+    keys.filter(k=>k.startsWith('morgane-tarot-de-niko-')&&k!==CACHE_NAME).map(k=>caches.delete(k))
+  )).then(()=>self.clients.claim()));
+});
+self.addEventListener('fetch',event=>{
+  const request=event.request;
+  if(request.method!=='GET')return;
+  const url=new URL(request.url);
+  if(url.origin!==self.location.origin||!url.pathname.startsWith(BASE.pathname))return;
+  if(request.mode==='navigate'){
+    event.respondWith(fetch(request).then(response=>{
+      if(response.ok)event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.put(request,response.clone())));
+      return response;
+    }).catch(()=>caches.match(request).then(cached=>cached||caches.match(OFFLINE))));
+    return;
+  }
+  if(!CACHEABLE.has(url.href))return;
+  event.respondWith(caches.match(request).then(cached=>{
+    if(cached)return cached;
+    return fetch(request).then(response=>{
+      if(response.ok)event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.put(request,response.clone())));
+      return response;
+    });
+  }));
+});

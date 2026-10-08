@@ -1,0 +1,31 @@
+{
+  "name": "Morgane medium · Œil d’Horus",
+  "short_name": "Morgane medium",
+  "description": "Soixante-neuf notions d'alchimie, d'astrologie, de kabbale et de tarot, reliées entre elles, avec calculs de thème et de nombres.",
+  "lang": "fr",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0a0910",
+  "theme_color": "#0a0910",
+  "categories": [
+    "education",
+    "lifestyle",
+    "books"
+  ],
+  "icons": [
+    {
+      "src": "icone.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icone-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

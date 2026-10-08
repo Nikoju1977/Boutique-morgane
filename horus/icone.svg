@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="L'Œil d'Hermès">
+  <rect width="512" height="512" rx="96" fill="#0a0910"/>
+  <circle cx="256" cy="256" r="150" fill="none" stroke="#c9a43f" stroke-width="6" opacity=".45"/>
+  <path d="M106 256c40-62 92-93 150-93s110 31 150 93c-40 62-92 93-150 93s-110-31-150-93z" fill="none" stroke="#c9a43f" stroke-width="10"/>
+  <circle cx="256" cy="256" r="46" fill="none" stroke="#c9a43f" stroke-width="10"/>
+  <circle cx="256" cy="256" r="15" fill="#c9a43f"/>
+  <path d="M256 92v34M256 386v34M92 256h34M386 256h34" stroke="#9e2b25" stroke-width="9" stroke-linecap="round"/>
+</svg>
