@@ -1,0 +1,14 @@
+import fs from 'node:fs';
+import path from 'node:path';
+const root=process.cwd(),out=path.join(root,'dist');
+fs.rmSync(out,{recursive:true,force:true});
+fs.mkdirSync(path.join(out,'client'),{recursive:true});
+fs.mkdirSync(path.join(out,'server'),{recursive:true});
+for(const name of ['index.html','assets','boutique','tarot','horus','lithotherapie','consultation','morgane','contact','confidentialite'])fs.cpSync(path.join(root,name),path.join(out,'client',name),{recursive:true});
+const worker=fs.readFileSync(path.join(root,'worker/index.js'),'utf8').replace("const ADMIN_HTML = '';",'const ADMIN_HTML = '+JSON.stringify(fs.readFileSync(path.join(root,'admin/index.html'),'utf8'))+';');
+fs.writeFileSync(path.join(out,'server/index.js'),worker);
+fs.mkdirSync(path.join(out,'.openai'),{recursive:true});
+fs.copyFileSync(path.join(root,'.openai/hosting.json'),path.join(out,'.openai/hosting.json'));
+fs.cpSync(path.join(root,'drizzle'),path.join(out,'.openai/drizzle'),{recursive:true});
+fs.writeFileSync(path.join(out,'server/wrangler.json'),JSON.stringify({name:'morgane-medium',main:'index.js',compatibility_date:'2026-10-08',assets:{directory:'../client',binding:'ASSETS',run_worker_first:['/api/*','/admin','/admin/*']},d1_databases:[{binding:'DB',database_name:'morgane-medium',database_id:'00000000-0000-4000-8000-000000000000'}]},null,2));
+console.log('Morgane medium : site et gestion construits.');

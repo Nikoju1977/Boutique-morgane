@@ -24,7 +24,7 @@ Le site reprend les tarifs existants sans inventer de stock. Les demandes se cop
 Les fonctions IA restent optionnelles, sans clé serveur intégrée ni promesse de fonctionnement sans compte fournisseur. Ne jamais ajouter de secret au dépôt.
 
 ## Aperçu hébergé
-Le dossier `dist` est synchronisé avec `python3 build-static.py` pour la publication Sites. Les pages à la racine restent utilisables sur GitHub Pages.
+Le dossier `dist` est généré avec `npm run build` pour la publication Sites. Les pages à la racine restent utilisables comme vitrine statique sur GitHub Pages ; la gestion et les informations enregistrées nécessitent l’hébergement Worker.
 
 ## Compléments Morgane
 - `/consultation/` : présentation de la consultation médium, questions fréquentes et préparation de demande. Aucune réservation ni envoi automatique.
@@ -32,3 +32,8 @@ Le dossier `dist` est synchronisé avec `python3 build-static.py` pour la public
 - `/contact/` : préparation de message, copie locale.
 - `/confidentialite/` : fonctionnement des formulaires, stockage local et services externes.
 Les noms visibles des outils sont au nom de Morgane. Les crédits des applications sources et leur licence restent conservés dans la documentation. Les tarifs, modalités exactes et coordonnées des consultations doivent être fournis par Morgane.
+
+## Gestion autonome
+`/admin/` permet de modifier la présentation, les contacts, les modalités et les prestations avec prix, durée et visibilité. Les changements sont enregistrés dans Cloudflare D1 et lus par les pages du site. Authentification ChatGPT et autorisation serveur : propriétaire identifié par `SITE_OWNER_EMAIL` (variable privée), ou compte de gestion enregistré par le propriétaire. Le compte de Morgane doit aussi recevoir l’accès au site dans les réglages de partage. Aucun e-mail d’invitation n’est envoyé par l’application.
+
+`npm run db:generate` produit les migrations ; `npm run build` construit le Worker et les assets. Les données D1 ne sont pas remplacées lors d’une publication. Les formulaires visiteurs ne sont pas stockés : ils préparent une demande, avec ouverture d’e-mail ou WhatsApp si ces coordonnées ont été renseignées. Un lien d’agenda existant peut être publié.
