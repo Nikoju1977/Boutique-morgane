@@ -381,4 +381,4 @@ if('serviceWorker'in navigator&&location.protocol.startsWith('http')){
 }
 if(vaultExists())$('vaultOpen').textContent='Déverrouiller le grimoire';
 const keyRestorePromise=restoreSavedKey();
-document.title='Morgane medium · Tarot de Niko · v'+VERSION;
+document.title='Morgane medium · Tarot de Morgane · v'+VERSION;

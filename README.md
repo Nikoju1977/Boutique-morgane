@@ -1,12 +1,12 @@
 # Morgane medium
 
-Site statique français : accueil féerique, boutique de Morgane, Tarot de Niko, Œil d’Horus et guide de 20 pierres.
+Site statique français : accueil féerique, boutique de Morgane, Tarot de Morgane, Œil d’Hermès de Morgane et guide de 20 pierres.
 
 ## Pages
 - `/` : accueil
 - `/boutique/` : neuf créations, photos et prix repris du dépôt original ; préparation de demande de commande, sans paiement en ligne.
-- `/tarot/` : application Tarot de Niko, 78 arcanes et lecture locale ; IA facultative via clé personnelle selon l’interface existante.
-- `/horus/` : intégration de l’Œil d’Hermès rebaptisée Œil d’Horus à la demande du propriétaire. Calculs locaux et grimoire ; IA facultative via clé personnelle.
+- `/tarot/` : application Tarot de Morgane, 78 arcanes et lecture locale ; IA facultative via clé personnelle selon l’interface existante.
+- `/horus/` : intégration de l’Œil d’Hermès rebaptisée Œil d’Hermès de Morgane à la demande du propriétaire. Calculs locaux et grimoire ; IA facultative via clé personnelle.
 - `/lithotherapie/` : 20 fiches avec recherche, filtres, références minéralogiques et entretien ; symbolique distinguée des propriétés physiques.
 
 ## Lancer
@@ -25,3 +25,10 @@ Les fonctions IA restent optionnelles, sans clé serveur intégrée ni promesse 
 
 ## Aperçu hébergé
 Le dossier `dist` est synchronisé avec `python3 build-static.py` pour la publication Sites. Les pages à la racine restent utilisables sur GitHub Pages.
+
+## Compléments Morgane
+- `/consultation/` : présentation de la consultation médium, questions fréquentes et préparation de demande. Aucune réservation ni envoi automatique.
+- `/morgane/` : présentation de l’univers sans biographie inventée.
+- `/contact/` : préparation de message, copie locale.
+- `/confidentialite/` : fonctionnement des formulaires, stockage local et services externes.
+Les noms visibles des outils sont au nom de Morgane. Les crédits des applications sources et leur licence restent conservés dans la documentation. Les tarifs, modalités exactes et coordonnées des consultations doivent être fournis par Morgane.

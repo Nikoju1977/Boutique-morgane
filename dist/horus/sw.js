@@ -1,5 +1,5 @@
 /* L'Œil d'Hermès — service worker. Coquille en cache, réseau uniquement pour les API. */
-var VERSION = "morgane-horus-hermes-v2";
+var VERSION = "morgane-hermes-v3";
 var COQUILLE = [
   "./",
   "./index.html",
@@ -20,7 +20,7 @@ self.addEventListener("message", function (e) {
 
 self.addEventListener("activate", function (e) {
   e.waitUntil(caches.keys().then(function (cles) {
-    return Promise.all(cles.map(function (k) { return k.startsWith("morgane-horus-") && k !== VERSION ? caches.delete(k) : null; }));
+    return Promise.all(cles.map(function (k) { return (k.startsWith("morgane-horus-") || k.startsWith("morgane-hermes-")) && k !== VERSION ? caches.delete(k) : null; }));
   }).then(function () { return self.clients.claim(); }));
 });
 

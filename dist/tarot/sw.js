@@ -1,5 +1,5 @@
 /* Oracle V2 : mode hors ligne limité aux ressources publiques de ce projet. */
-const CACHE_NAME='morgane-tarot-de-niko-v4';
+const CACHE_NAME='morgane-tarot-v5';
 const BASE=new URL('./',self.registration.scope);
 const OFFLINE=new URL('index.html',BASE).href;
 const PATHS=[
@@ -15,7 +15,7 @@ self.addEventListener('install',event=>{
 });
 self.addEventListener('activate',event=>{
   event.waitUntil(caches.keys().then(keys=>Promise.all(
-    keys.filter(k=>k.startsWith('morgane-tarot-de-niko-')&&k!==CACHE_NAME).map(k=>caches.delete(k))
+    keys.filter(k=>k.startsWith('morgane-tarot-')&&k!==CACHE_NAME).map(k=>caches.delete(k))
   )).then(()=>self.clients.claim()));
 });
 self.addEventListener('fetch',event=>{
