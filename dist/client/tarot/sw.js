@@ -1,5 +1,5 @@
 /* Oracle V2 : mode hors ligne limité aux ressources publiques de ce projet. */
-const CACHE_NAME='morgane-tarot-v5';
+const CACHE_NAME='morgane-tarot-v6';
 const BASE=new URL('./',self.registration.scope);
 const OFFLINE=new URL('index.html',BASE).href;
 const PATHS=[

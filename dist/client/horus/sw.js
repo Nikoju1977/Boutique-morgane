@@ -1,5 +1,5 @@
 /* L'Œil d'Hermès — service worker. Coquille en cache, réseau uniquement pour les API. */
-var VERSION = "morgane-hermes-v4";
+var VERSION = "morgane-hermes-v5";
 var COQUILLE = [
   "./",
   "./index.html",
