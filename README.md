@@ -1,4 +1,29 @@
-# Morgane medium
+# Morgane medium — boutique et services · Studio Niko Design
+
+**Static storefront · Customer-controlled contact · Optional Cloudflare D1 administration**
+
+[![Licence](https://img.shields.io/badge/license-restricted-lightgrey)](LICENSE.md) · [Sécurité](SECURITY.md) · [English overview](#english-overview)
+
+## Architecture
+
+```mermaid
+flowchart TD
+ Visitor[Visitor] --> Static[Static storefront and tools]
+ Static --> Contact[Locally prepared contact request]
+ Manager[Authorized manager] --> Worker[Configured Worker]
+ Worker --> D1[Settings and revision in D1]
+ D1 --> Public[Published settings]
+ Public --> Static
+```
+
+| Source | Fonction constatée |
+| --- | --- |
+| [assets/request.js](assets/request.js) | Préparation et copie locale des demandes |
+| [assets/admin.js](assets/admin.js) | Interface de gestion |
+| [worker/index.js](worker/index.js) | Autorisation, validation JSON et révisions anti-écrasement |
+| [package.json](package.json) | Construction et génération des migrations |
+
+**État des paiements :** le parcours documenté prépare une demande, sans encaissement ni réservation automatique. Aucune intégration Stripe, PayPal ou Wero opérationnelle n'est établie dans les composants commerciaux inspectés. Ne pas annoncer une commande payée ou un stock confirmé sur la seule préparation du message.
 
 Site statique français : accueil féerique, boutique de Morgane, Tarot de Morgane, Œil d’Hermès de Morgane et guide de 20 pierres.
 
@@ -39,3 +64,16 @@ Les noms visibles des outils sont au nom de Morgane. Les crédits des applicatio
 `npm run db:generate` produit les migrations ; `npm run build` construit le Worker et les assets. Les données D1 ne sont pas remplacées lors d’une publication. Les formulaires visiteurs ne sont pas stockés : ils préparent une demande, avec ouverture d’e-mail ou WhatsApp si ces coordonnées ont été renseignées. Un lien d’agenda existant peut être publié.
 
 Un compte de gestion désigné par le propriétaire peut aussi être autorisé par la variable privée `SITE_MANAGER_EMAIL`. Le compte doit rester autorisé dans le partage du site ; sa révocation s’effectue également dans ces réglages.
+
+
+## Qualification proposée
+
+Sur des produits et comptes fictifs, vérifier l'affichage des prix, la copie des demandes, les coordonnées configurées, la révision concurrente et l'exclusion des champs privés des réponses publiques. L'autorisation Worker dépend d'en-têtes d'identité de la plateforme d'hébergement : la frontière de confiance doit être vérifiée dans l'environnement réel avant d'ouvrir l'administration. Ne pas exposer le Worker hors de cette frontière sans authentification adaptée.
+
+Les fonctions de tarot et de lithothérapie sont des contenus culturels ou symboliques, non des soins ou des prédictions vérifiées. Les modalités commerciales, obligations légales et droits sur les illustrations et contenus restent à contrôler avant exploitation. Aucun test, paiement, message, appel fournisseur ou déploiement n'a été exécuté pour cette révision.
+
+## English overview
+
+Morgane medium is a static storefront with local request preparation, optional cultural tools and configurable services. A separately configured Worker and D1 database provide settings administration with revision checks. No payment processing or automated booking was established in the inspected commercial components. Hosting identity and authorization boundaries require qualification. Existing component credits and licenses remain applicable. No new runtime or commercial validation was performed.
+
+[Notice de droits](LICENSE.md) : droits réservés pour les contributions originales concernées ; les licences spécifiques et droits tiers prévalent.
